@@ -1,26 +1,44 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Temperature Converter</title>
-        <link rel="stylesheet" href="styles.css">
-    </head>
-    <body>
-        <div class="container">
-            <h1> Temperature Converter 🌡️🔄</h1>
-            
-            <div class="converter">
-                <input type="number" id="temperature" placeholder="enter the temperature value">
-                <select id="unit">
-                    <option value="C"> Celsius </option>
-                    <option value="F"> Fahrenheit </option>
-                </select>
-                <button onclick="convertTemperature()"> Convert </button>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Temperature Converter</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Temperature Converter</h1>
+        
+        <!-- Termometreler -->
+        <div class="thermometers">
+            <div class="thermometer" id="celsius-thermometer">
+                <div class="liquid" id="celsius-liquid"></div>
+                <span class="value-label" id="celsius-value-label">-</span> <!-- Sıcaklık değeri -->
+                <span class="label">Celsius</span> <!-- Termometrenin birim adı -->
             </div>
-            <p id="result"></p>
-            <p id="error"></p>
+            <div class="thermometer" id="fahrenheit-thermometer">
+                <div class="liquid" id="fahrenheit-liquid"></div>
+                <span class="value-label" id="fahrenheit-value-label">-</span> <!-- Sıcaklık değeri -->
+                <span class="label">Fahrenheit</span> <!-- Termometrenin birim adı -->
+            </div>
+            
         </div>
-        <script src="index.js"></script>
-    </body>
+
+        <!-- Dönüştürücü Form -->
+        <div class="converter">
+            <input type="number" id="temperature" placeholder="Enter temperature">
+            <select id="unit">
+                <option value="C">Celsius</option>
+                <option value="F">Fahrenheit</option>
+            </select>
+            <button id="convert-btn">Convert</button>
+        </div>
+
+        <div id="result"></div>
+        <div id="error"></div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
 </html>

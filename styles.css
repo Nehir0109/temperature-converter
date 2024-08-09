@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #cbf078;
-    color: #333;
+    color: rgb(11, 46, 186);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,15 +13,63 @@ body {
     background-color: white;
     padding: 20px;
     border-radius: 8px;
-    border-color: #e46161;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
 h1 {
     margin-bottom: 20px;
     font-size: 24px;
-    text-align: center;
 }
+
+.thermometers {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.thermometer {
+    width: 50px;
+    height: 200px;
+    background-color: #eee;
+    border-radius: 25px;
+    position: relative;
+    border: 2px solid #ccc;
+    overflow: hidden;
+    margin: 0 10px;
+}
+
+.liquid {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #e46161;
+    border-radius: 25px 25px 0 0;
+    height: 0;
+    transition: height 0.3s ease;
+}
+
+.label {
+    position: absolute;
+    bottom: -50px; /* Termometre biriminin altında yer alır */
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.value-label {
+    position: absolute;
+    top: 10px; /* Tüpün üst kısmına yerleştirildi */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    color: rgb(11, 46, 186);
+}
+
 
 .converter {
     display: flex;
@@ -32,9 +80,10 @@ h1 {
 input, select, button {
     padding: 10px;
     margin: 5px 0;
-    border: 2px solid;
     border-radius: 4px;
     width: 200px;
+    border: 2px solid #ccc;
+    font-size: large;
 }
 
 button {
@@ -50,21 +99,10 @@ button:hover {
     background-color: #da4848;
 }
 
-input{
-    border-color: #f1b963;
-    font-size: large;
-}
-select {
-    border-color: #f1b963;
-    font-size: large;
-}
-
 #result {
     margin-top: 20px;
     font-size: 18px;
     font-weight: bold;
-    background-color: #f8f398;
-    border-radius: 5px;
 }
 
 #error {
