@@ -75,8 +75,14 @@ input, select, button {
     margin: 5px 0;
     border-radius: 4px;
     width: 200px;
-    border: 2px solid #ccc;
+    border: 2px solid;
     font-size: large;
+}
+input{
+    border-color: #f1b963;
+}
+select{
+    border-color: #f1b963;
 }
 
 button {
