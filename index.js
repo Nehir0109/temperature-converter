@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const unit = unitSelect.value;
 
         if (isNaN(temperature) || temperatureInput.value === '') {
+            resetThermometers();
             return;
         }
 
@@ -36,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const unit = unitSelect.value;
 
         if (isNaN(temperature) || temperatureInput.value === '') {
-            errorElement.textContent = '* Please enter a valid number!';
+            errorElement.textContent = 'Please enter a valid number.';
             resultElement.textContent = '';
             return;
         }
@@ -54,6 +55,14 @@ document.addEventListener('DOMContentLoaded', () => {
             fahrenheitLabel.textContent = `${fahrenheitTemp.toFixed(2)} °F`;
             fahrenheitLiquid.style.height = `${fahrenheitTemp * 2}px`; 
         }
+    }
+
+    function resetThermometers() {
+        celsiusLiquid.style.height = '0px';
+        fahrenheitLiquid.style.height = '0px';
+        celsiusLabel.textContent = '°C';
+        fahrenheitLabel.textContent = '°F';
+        resultElement.textContent = '';
     }
 
     temperatureInput.addEventListener('input', updateTemperatures);
