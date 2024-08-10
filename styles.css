@@ -54,7 +54,8 @@ h1 {
 
 .label {
     position: absolute;
-    top: 10px;
+    top: 50%;
+    transform: translateY(-50%);
     width: 100%;
     text-align: center;
     font-weight: bold;
@@ -62,18 +63,6 @@ h1 {
     font-size: 20px;
     z-index: 1;
 }
-
-.temperature {
-    position: absolute;
-    top: 40px; /* Label'in biraz altına */
-    width: 100%;
-    text-align: center;
-    font-weight: bold;
-    color: black;
-    font-size: 16px;
-    z-index: 1;
-}
-
 
 .converter {
     display: flex;
