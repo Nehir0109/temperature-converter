@@ -3,42 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
     <title>Temperature Converter</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <h1>Temperature Converter</h1>
-        
-        <!-- Termometreler -->
         <div class="thermometers">
-            <div class="thermometer" id="celsius-thermometer">
+            <div class="thermometer">
                 <div class="liquid" id="celsius-liquid"></div>
-                <span class="value-label" id="celsius-value-label">-</span> <!-- Sıcaklık değeri -->
-                <span class="label">Celsius</span> <!-- Termometrenin birim adı -->
+                <div class="label">°C</div>
+                <div class="temperature" id="celsius-temp">°C</div>
             </div>
-            <div class="thermometer" id="fahrenheit-thermometer">
+            <div class="thermometer">
                 <div class="liquid" id="fahrenheit-liquid"></div>
-                <span class="value-label" id="fahrenheit-value-label">-</span> <!-- Sıcaklık değeri -->
-                <span class="label">Fahrenheit</span> <!-- Termometrenin birim adı -->
+                <div class="label">°F</div>
+                <div class="temperature" id="fahrenheit-temp">°F</div>
             </div>
-            
         </div>
-
-        <!-- Dönüştürücü Form -->
         <div class="converter">
-            <input type="number" id="temperature" placeholder="Enter temperature">
-            <select id="unit">
+            <input type="number" id="temperature-input" placeholder="Enter temperature" />
+            <select id="unit-select">
                 <option value="C">Celsius</option>
                 <option value="F">Fahrenheit</option>
             </select>
-            <button id="convert-btn">Convert</button>
+            <button id="convert-button">Convert</button>
         </div>
-
         <div id="result"></div>
         <div id="error"></div>
     </div>
-
     <script src="index.js"></script>
 </body>
 </html>

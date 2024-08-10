@@ -1,50 +1,62 @@
-document.getElementById('temperature').addEventListener('input', function() {
-    const temp = parseFloat(this.value);
-    const unit = document.getElementById('unit').value;
-    const celsiusLabel = document.getElementById('celsius-value-label');
-    const fahrenheitLabel = document.getElementById('fahrenheit-value-label');
+document.addEventListener('DOMContentLoaded', () => {
+    const temperatureInput = document.getElementById('temperature-input');
+    const unitSelect = document.getElementById('unit-select');
+    const resultElement = document.getElementById('result');
+    const errorElement = document.getElementById('error');
 
-    if (!isNaN(temp)) {
-        if (unit === 'C') {
-            celsiusLabel.textContent = `${temp.toFixed(2)}°C`;
-            fahrenheitLabel.textContent = `-`;
-        } else if (unit === 'F') {
-            fahrenheitLabel.textContent = `${temp.toFixed(2)}°F`;
-            celsiusLabel.textContent = `-`;
+    function updateTemperatures() {
+        const temperature = parseFloat(temperatureInput.value);
+        const unit = unitSelect.value;
+
+        if (isNaN(temperature) || temperatureInput.value === '') {
+            return;
         }
-    } else {
-        celsiusLabel.textContent = `-`;
-        fahrenheitLabel.textContent = `-`;
-    }
-});
 
+        let celsiusTemp, fahrenheitTemp;
 
-
-document.getElementById('convert-btn').addEventListener('click', function() {
-    const temp = parseFloat(document.getElementById('temperature').value);
-    const unit = document.getElementById('unit').value;
-    const celsiusLiquid = document.getElementById('celsius-liquid');
-    const fahrenheitLiquid = document.getElementById('fahrenheit-liquid');
-    const celsiusLabel = document.getElementById('celsius-value-label');
-    const fahrenheitLabel = document.getElementById('fahrenheit-value-label');
-    let convertedTemp;
-
-    if (isNaN(temp)) {
-        document.getElementById('error').textContent = '* Please enter a valid number.';
-        return;
+        if (unit === 'C') {
+            fahrenheitTemp = temperature;
+            celsiusTemp = (fahrenheitTemp - 32) * 5 / 9;
+            document.getElementById('fahrenheit-temp').textContent = `${fahrenheitTemp.toFixed(2)} °F`;
+            document.getElementById('fahrenheit-liquid').style.height = `${fahrenheitTemp * 2}px`;
+            document.getElementById('celsius-liquid').style.height = '0px'; 
+        } else if (unit === 'F') {
+            celsiusTemp = temperature;
+            fahrenheitTemp = (celsiusTemp * 9 / 5) + 32;
+            document.getElementById('celsius-temp').textContent = `${celsiusTemp.toFixed(2)} °C`;
+            document.getElementById('celsius-liquid').style.height = `${celsiusTemp * 2}px`;
+            document.getElementById('fahrenheit-liquid').style.height = '0px'; 
+        }
     }
 
-    if (unit === 'C') {
-        convertedTemp = (temp * 9/5) + 32;
-        fahrenheitLiquid.style.height = `${convertedTemp / 212 * 100}%`;
-        fahrenheitLabel.textContent = `${convertedTemp.toFixed(2)}°F`;
-        document.getElementById('result').textContent = `${temp.toFixed(2)}°C is ${convertedTemp.toFixed(2)}°F.`;
-    } else if (unit === 'F') {
-        convertedTemp = (temp - 32) * 5/9;
-        celsiusLiquid.style.height = `${convertedTemp / 100 * 100}%`;
-        celsiusLabel.textContent = `${convertedTemp.toFixed(2)}°C`;
-        document.getElementById('result').textContent = `${temp.toFixed(2)}°F is ${convertedTemp.toFixed(2)}°C.`;
+    function convertTemperature() {
+        const temperature = parseFloat(temperatureInput.value);
+        const unit = unitSelect.value;
+
+        if (isNaN(temperature) || temperatureInput.value === '') {
+            errorElement.textContent = 'Please enter a valid number.';
+            resultElement.textContent = '';
+            return;
+        }
+
+        errorElement.textContent = '';
+
+        let convertedTemp;
+
+        if (unit === 'C') {
+            convertedTemp = (temperature - 32) * 5 / 9;
+            resultElement.textContent = `${temperature.toFixed(2)} °F has been converted to ${convertedTemp.toFixed(2)} °C.`;
+            document.getElementById('celsius-temp').textContent = `${convertedTemp.toFixed(2)} °C`;
+            document.getElementById('celsius-liquid').style.height = `${convertedTemp * 2}px`;
+        } else if (unit === 'F') {
+            convertedTemp = (temperature * 9 / 5) + 32;
+            resultElement.textContent = `${temperature.toFixed(2)} °C has been converted to ${convertedTemp.toFixed(2)} °F.`;
+            document.getElementById('fahrenheit-temp').textContent = `${convertedTemp.toFixed(2)} °F`;
+            document.getElementById('fahrenheit-liquid').style.height = `${convertedTemp * 2}px`;
+        }
     }
 
-    document.getElementById('error').textContent = '';
+    temperatureInput.addEventListener('input', updateTemperatures);
+    unitSelect.addEventListener('change', updateTemperatures);
+    document.getElementById('convert-button').addEventListener('click', convertTemperature);
 });
