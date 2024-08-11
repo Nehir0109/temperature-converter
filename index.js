@@ -5,8 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const errorElement = document.getElementById('error');
     const celsiusLiquid = document.getElementById('celsius-liquid');
     const fahrenheitLiquid = document.getElementById('fahrenheit-liquid');
-    const celsiusLabel = document.querySelector('.thermometer:nth-child(1) .label');
-    const fahrenheitLabel = document.querySelector('.thermometer:nth-child(2) .label');
+    const celsiusLabel = document.getElementById('celsius-label');
+    const fahrenheitLabel = document.getElementById('fahrenheit-label');
+    const convertButton = document.getElementById('convert-button');
 
     function updateTemperatures() {
         const temperature = parseFloat(temperatureInput.value);
@@ -21,13 +22,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const fahrenheitTemp = temperature;
             fahrenheitLabel.textContent = `${fahrenheitTemp.toFixed(2)} °F`;
             fahrenheitLiquid.style.height = `${fahrenheitTemp * 2}px`; 
-            celsiusLabel.textContent = '°C'; 
-            celsiusLiquid.style.height = '0px'; 
+            celsiusLabel.textContent = '°C';
+            celsiusLiquid.style.height = '0px';
         } else if (unit === 'F') {
             const celsiusTemp = temperature;
             celsiusLabel.textContent = `${celsiusTemp.toFixed(2)} °C`;
             celsiusLiquid.style.height = `${celsiusTemp * 2}px`;
-            fahrenheitLabel.textContent = '°F'; 
+            fahrenheitLabel.textContent = '°F';
             fahrenheitLiquid.style.height = '0px'; 
         }
     }
@@ -37,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const unit = unitSelect.value;
 
         if (isNaN(temperature) || temperatureInput.value === '') {
-            errorElement.textContent = 'Please enter a valid number.';
+            errorElement.textContent = '* Please enter a valid number!';
             resultElement.textContent = '';
             return;
         }
@@ -67,5 +68,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     temperatureInput.addEventListener('input', updateTemperatures);
     unitSelect.addEventListener('change', updateTemperatures);
-    document.getElementById('convert-button').addEventListener('click', convertTemperature);
+    convertButton.addEventListener('click', convertTemperature);
+
+    // Enter tuşuna basıldığında hem termometreleri hem de dönüşüm işlemini günceller
+    temperatureInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Formun yeniden yüklenmesini engeller
+            updateTemperatures(); // Termometreleri günceller
+            convertTemperature(); // Dönüşüm işlemini yapar
+        }
+    });
 });
